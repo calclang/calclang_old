@@ -118,6 +118,7 @@ times = 5000
 loop times
     print "I like it!"
 end loop
+```
 
 # Example
 ![Example](/screenshots/geometry_source.png?raw=true "Example")
