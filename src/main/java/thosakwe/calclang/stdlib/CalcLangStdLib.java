@@ -93,6 +93,14 @@ public class CalcLangStdLib {
         return Math.log10(args[0]);
     }
 
+    private static double avg(Double... args) {
+        double result = 0;
+        for (double arg: args) {
+            result += arg;
+        }
+        return result / args.length;
+    }
+
     public static Map<String, Function<Double[], Double>> get() {
         Map<String, Function<Double[], Double>> stdlib = new HashMap<>();
 
@@ -116,6 +124,7 @@ public class CalcLangStdLib {
         stdlib.put("log10", CalcLangStdLib::log10);
         stdlib.put("rad", CalcLangStdLib::rad);
         stdlib.put("deg", CalcLangStdLib::deg);
+        stdlib.put("avg", CalcLangStdLib::avg);
 
         return stdlib;
     }

@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: antlr4-runtime-4.5.jar commons-cli-1.3.1.jar org.abego.tre
+ elayout.core-1.0.1.jar
+Main-Class: thosakwe.calclang.Main
+

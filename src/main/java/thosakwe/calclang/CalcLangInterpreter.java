@@ -177,7 +177,7 @@ class CalcLangInterpreter extends CalcLangBaseVisitor<Double> {
         CalcLangParser.CompilationUnitContext oldScript = currentScript;
         String path = ctx.STRING().getText().replaceAll("(^\")|(\"$)", "");
         File file = new File(options.getOptionValue("in", "."));
-        String absolute = file.toPath().resolve("..").resolve(path).toAbsolutePath().toString();
+        String absolute = file.toPath().resolveSibling(".").resolve(path).toAbsolutePath().toString();
         try {
             ANTLRInputStream antlrInputStream = new ANTLRFileStream(absolute);
             CalcLangLexer lexer = new CalcLangLexer(antlrInputStream);

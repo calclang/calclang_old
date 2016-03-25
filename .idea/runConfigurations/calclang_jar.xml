@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="calclang.jar" type="JarApplication" factoryName="JAR Application" singleton="true">
+    <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/calclang_jar/calclang.jar" />
+    <option name="WORKING_DIRECTORY" value="$MAVEN_REPOSITORY$" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <envs />
+    <module name="calclang" />
+    <method>
+      <option name="BuildArtifacts" enabled="true">
+        <artifact name="calclang:jar" />
+      </option>
+    </method>
+  </configuration>
+</component>

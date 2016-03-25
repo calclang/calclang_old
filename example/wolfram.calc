@@ -1,0 +1,6 @@
+fn main()
+	average = avg(420, 69, 1337, 666)
+	print "The average of your mom's least favorite numbers is ${average}"
+	ret 0
+end main
+
