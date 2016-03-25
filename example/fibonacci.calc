@@ -1,14 +1,17 @@
 // Fib!
+// ... Not working right now!
 
 fn fib(n)
+    result = 0
     if (n < 2)
-        ret n
-    endif
-    ret fib(n - 1) + fib(n - 2)
+        result = n
+    end if
+    result = fib(n - 1) + fib(n - 2)
+    ret result
 end fib
 
 fn main()
     index = 10
-    printf("The %dth Fibonacci number is %d", index + 1, fib(index))
+    print "The ${index + 1}th Fibonacci number is ${fib(index)}.")
     ret 0
 end main

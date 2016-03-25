@@ -129,6 +129,7 @@ public class CalcLangStdLib {
         constants.put("SPEED_OF_LIGHT", 2.998 * Math.pow(10, 8));
         constants.put("E", Math.E);
         constants.put("I", Math.sqrt(-1.0));
+        constants.put("INFINITY", -1.0 * Math.log(Math.E));
         return constants;
     }
 }

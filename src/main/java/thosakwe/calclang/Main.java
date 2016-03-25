@@ -39,7 +39,7 @@ public class Main {
                 out.print("> ");
                 input = stdin.readLine();
                 if (!input.equals("quit")) {
-                    String program = "fn main()\nret " + input + "\nend main";
+                    String program = "fn main()\nresult =" + input + "\nret result\nend main";
                     compile(new ANTLRInputStream(program), options, interpreter, program);
                 }
             }
@@ -57,7 +57,7 @@ public class Main {
             result = interpreter.visitCompilationUnit(compilationUnit);
             print(result);
         } catch (Exception e) {
-            compile(new ANTLRInputStream("fn main()\nret " + originalText + "\nend main"), options, interpreter, originalText);
+            compile(new ANTLRInputStream("fn main()\nresult = " + originalText + "\nret result\nend main"), options, interpreter, originalText);
         }
     }
 
