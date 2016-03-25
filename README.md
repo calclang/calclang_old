@@ -1,6 +1,6 @@
 ![calclang](/screenshots/geometry_output.png?raw=true "calclang")
 
-[Example](#example)
+[Examples](#example)
 
 # calclang
 A pointless scripting language that does math. Made with ANTLR 4 and Java. **Terrible docs.**
@@ -121,4 +121,12 @@ end loop
 ```
 
 # Example
+
+Math Samples
+![Math](/screenshots/math.png?raw=true "Math")
+
+Geometry, Printing
 ![Example](/screenshots/geometry_source.png?raw=true "Example")
+
+Fibonacci which doesn't even work
+![Fib](/screenshots/fibonacci.png?raw=true "Fib")
