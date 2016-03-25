@@ -1,0 +1,21 @@
+// Feel free to modify the values of length and width.
+inc "import_this.calc"
+
+global length = 3
+global width = 4
+
+fn main()
+    print "Rectangle Area: ${areaOfRect(4, 20)}"
+    print "Circle Area: ${areaOfCircle(length)}"
+    print "Cube Volume: ${volumeOfCube(length)}"
+    print "sin90 = ${sin(rad(90))}"
+
+    print ""
+    print "Assume you have a right triangle."
+    print "If the length of one leg is ${length}"
+    print "and the length of the other is ${width},"
+    print "then the hypotenuse's length is ${hypotenuse(length, width)}."
+
+    print ""
+    ret 0
+end main

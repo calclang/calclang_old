@@ -1,0 +1,17 @@
+// Import this and gain access to a wide variety of functions...
+
+fn areaOfRect(length, width)
+    ret length * width
+end areaOfRect
+
+fn areaOfCircle(radius)
+    ret PI * (radius ^ 2)
+end areaOfCircle
+
+fn volumeOfCube(length)
+    ret length ^ 3
+end volumeOfCube
+
+fn hypotenuse(a, b)
+    ret sqrt((a^2) + (b^2))
+end hypotenuse

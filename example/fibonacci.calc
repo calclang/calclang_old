@@ -1,0 +1,14 @@
+// Fib!
+
+fn fib(n)
+    if (n < 2)
+        ret n
+    endif
+    ret fib(n - 1) + fib(n - 2)
+end fib
+
+fn main()
+    index = 10
+    printf("The %dth Fibonacci number is %d", index + 1, fib(index))
+    ret 0
+end main

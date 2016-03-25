@@ -1,0 +1,12 @@
+// There is no real support for strings in CalcLang. Sorry.
+// The only type in CalcLang is a double-precision number.
+// However, you can print stuff.
+
+fn main()
+    leet = 1337
+    print "Hello, world!"
+    // And, interpolation.
+    print "Hackers like to say ${leet}."
+    print "Welcome to CalcLang :)"
+    ret 0
+end main

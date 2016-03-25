@@ -1,0 +1,16 @@
+fn addTwo(x)
+    ret x + 2
+end addTwo
+
+fn main()
+    twoToTheFifth = 2 ^ 5
+    twoTimesTwo = 2 * 2
+    twoDividedByThree = 2 / 3
+    twoPlusOne = 2 + 1
+    twoMinusOne = 2 - 1
+    twoTimesThreeToTheFourth = 2 * (3 ^ 4)
+    three = 3
+    fifteen = three * 5
+
+    ret addTwo(sin(45))
+end main
