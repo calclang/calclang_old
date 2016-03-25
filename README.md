@@ -87,7 +87,7 @@ To reproduce...
 ```
 global one = 1
 
-fn hi
+fn hi()
     two = 2
     print "one=${one}, two=${two}"
 end fn
