@@ -59,6 +59,10 @@ But in the "future" (never), if statements will work.
 * Predefined Functions:
     * All of these guys:
     * ![Predefined Functions](/screenshots/stdfuncs.png?raw=true "Predefined Functions")
+    * rnd is Math.random
+    * root(x, n) - Return the nth root of x
+    * log(x, base) - logarithm with base other than E or 10
+    * rad/deg - Convert to rad/deg
 
 # Usage
 1.  Build the jar, or compile the source and run the classes.
