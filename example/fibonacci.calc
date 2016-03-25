@@ -4,10 +4,9 @@
 fn fib(n)
     result = 0
     if (n < 2)
-        result = n
+        ret n
     end if
-    result = fib(n - 1) + fib(n - 2)
-    ret result
+    ret fib(n - 1) + fib(n - 2)
 end fib
 
 fn main()
