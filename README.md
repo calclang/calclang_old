@@ -1,3 +1,7 @@
+![calclang](/screenshots/geometry_output.png?raw=true "calclang")
+
+[Example](#example)
+
 # calclang
 A pointless scripting language that does math. Made with ANTLR 4 and Java. **Terrible docs.**
 
@@ -110,3 +114,6 @@ times = 5000
 loop times
     print "I like it!"
 end loop
+
+# Example
+![Example](/screenshots/geometry_source.png?raw=true "Example")
