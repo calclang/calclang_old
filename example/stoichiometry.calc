@@ -1,0 +1,24 @@
+// I hate AP Chem
+
+global MASS_OF_OXYGEN = 15.949146
+
+fn gramsToMoles(grams, molarMass)
+    ret grams / molarMass;
+end gramsToMoles
+
+fn molesToMolecules(nMoles)
+    ret nMoles * AVOGADRO
+end molesToMolecules
+
+fn main()
+    gramsOxygen = 250
+    moles = gramsToMoles(gramsOxygen, MASS_OF_OXYGEN)
+    molecules = molesToMolecules(moles)
+
+    print "The mass of one mole of oxygen (O2) is ${MASS_OF_OXYGEN} grams."
+    print "If you have ${gramsOxygen}g of oxygen,"
+    print "then you have ${moles} moles of oxygen."
+    print "This is also ${molecules} molecules of oxygen."
+
+    ret molecules
+end main

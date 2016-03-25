@@ -125,6 +125,9 @@ end loop
 Math Samples
 ![Math](/screenshots/math.png?raw=true "Math")
 
+Mass Stoichiometry
+![Stoichiometry](/screenshots/stoichiometry_source.png?raw=true "Stoichiometry")
+
 Geometry, Printing
 ![Example](/screenshots/geometry_source.png?raw=true "Example")
 
