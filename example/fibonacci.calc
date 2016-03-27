@@ -1,19 +1,11 @@
 // Fib!
-// ... Not working right now!
 
 fn fib(n)
-    result = 0
-    if (n < 2)
-        ret n
-    end if
-    if (n >= 2)
-        ret fib(n - 1) + fib(n - 2)
-    end if
-    ret 1337
+    f1 = ((1 + sqrt(5)) / 2) ^ n
+    f2 = ((1 - sqrt(5)) / 2) ^ n
+    ret floor((f1 - f2) / sqrt(5))
 end fib
 
 fn main()
-    index = 1
-    fib(index)
-    ret PI ^ 2
+    ret fib(13)
 end main

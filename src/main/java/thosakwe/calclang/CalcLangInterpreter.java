@@ -82,10 +82,8 @@ class CalcLangInterpreter extends CalcLangBaseVisitor<Double> {
 
         // Fuck it, might as well copy all symbols into it too
         oldBlock.symbols.forEach((k, v) -> {
-            if (!blockContext.symbols.containsKey(k)) {
-                debug("Injecting " + k + "=" + v.getText() + " into new scope");
-                blockContext.symbols.put(k, v);
-            }
+            debug("Injecting " + k + "=" + v.getText() + " into new scope");
+            blockContext.symbols.put(k, v);
         });
 
         blockContext.execute = true;
@@ -181,11 +179,11 @@ class CalcLangInterpreter extends CalcLangBaseVisitor<Double> {
             if (ctx.EQU() != null) result = first.equals(second);
             else if (ctx.NOT() != null) result = !first.equals(second);
             else if (ctx.AND() != null) result = first.equals(1.0) && second.equals(1.0);
+            else if (ctx.OR() != null) result = first.equals(1.0) || second.equals(1.0);
             else if (ctx.LT() != null) result = first < second;
             else if (ctx.LTE() != null) result = first <= second;
             else if (ctx.GT() != null) result = first > second;
             else if (ctx.GTE() != null) result = first >= second;
-            else if (ctx.OR() != null) result = first.equals(1.0) || second.equals(1.0);
 
             return result ? 1.0 : 0.0;
         }

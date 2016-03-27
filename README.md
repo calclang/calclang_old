@@ -135,5 +135,6 @@ Mass Stoichiometry
 Geometry, Printing
 ![Example](/screenshots/geometry_source.png?raw=true "Example")
 
-Fibonacci which doesn't even work
+Fibonacci
 ![Fib](/screenshots/fibonacci.png?raw=true "Fib")
+![Fib](/screenshots/fibonacci_output.png?raw=true "Fib")
