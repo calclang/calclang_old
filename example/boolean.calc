@@ -1,0 +1,30 @@
+fn main()
+    if (true)
+        print "true == 1.0"
+    end if
+
+    if (1 < 2)
+        print "1 > 2"
+    end if
+
+    if (1 > 0)
+        print "1 > 0"
+    end if
+
+    if (1 || 0)
+        print "1 || 0"
+    end if
+
+    if (2 >= 3 * 2)
+        print "2 >= 6???"
+    end if
+
+    if (true && false)
+        print "true && false???"
+    end if
+
+    if (false)
+        print "false == 1.0???"
+    end if
+
+end main

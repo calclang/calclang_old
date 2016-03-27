@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.BitSet;
 
+import static java.lang.System.err;
+import static java.lang.System.exit;
 import static java.lang.System.out;
 
 public class Main {
@@ -26,7 +28,8 @@ public class Main {
         if (options.hasOption("in")) {
             try {
                 ANTLRFileStream antlrInputStream = new ANTLRFileStream(options.getOptionValue("in"));
-                compile(antlrInputStream, options, interpreter, "undefined");
+                compile(antlrInputStream, options, interpreter,
+                        "The reason you are seeing this is because you have encountered a problem that has not been fixed...");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -57,12 +60,16 @@ public class Main {
             result = interpreter.visitCompilationUnit(compilationUnit);
             print(result);
         } catch (Exception e) {
+            e.printStackTrace(err);
             compile(new ANTLRInputStream("fn main()\nresult = " + originalText + "\nret result\nend main"), options, interpreter, originalText);
         }
     }
 
     private static void print(Double result) {
-        if (result != null) out.println("Result: " + result);
+        if (result != null) {
+            out.println("Result: " + result);
+            exit(result.intValue());
+        }
         else out.println("No result. Perhaps there was an error?");
     }
 }

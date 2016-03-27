@@ -37,14 +37,17 @@ strings.
 ```
 
 # Boolean
-No. Not yet. Sorry dude. ):
-But in the "future" (never), if statements will work.
+Booleans in Calclang are mapped to numbers.
 
 ```
     true becomes 1.0
     false becomes 0.0
     1.0 == true
     0.0 == false
+
+    if (true)
+        print "Hello, bool!"
+    end if
 ```
 
 # "Standard Lib"

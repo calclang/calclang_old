@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-java -Dfile.encoding=UTF-8 -jar out/artifacts/calclang_jar/calclang.jar $@
+DIR=dirname "$(readlink -f "$0")"
+echo $DIR
+java -Dfile.encoding=UTF-8 -jar "$DIR/out/artifacts/calclang_jar/calclang.jar" $@

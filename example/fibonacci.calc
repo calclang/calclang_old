@@ -6,11 +6,14 @@ fn fib(n)
     if (n < 2)
         ret n
     end if
-    ret fib(n - 1) + fib(n - 2)
+    if (n >= 2)
+        ret fib(n - 1) + fib(n - 2)
+    end if
+    ret 1337
 end fib
 
 fn main()
-    index = 10
-    print "The ${index + 1}th Fibonacci number is ${fib(index)}.")
-    ret 0
+    index = 1
+    fib(index)
+    ret PI ^ 2
 end main
