@@ -1,4 +1,4 @@
-package thosakwe.calclang.stdlib;
+package thosakwe.calclang.vm.stdlib;
 
 import java.util.HashMap;
 import java.util.Map;

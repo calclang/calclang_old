@@ -1,4 +1,4 @@
-package thosakwe.calclang;
+package thosakwe.calclang.vm;
 
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -6,36 +6,23 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.apache.commons.cli.CommandLine;
-import thosakwe.calclang.antlr.CalcLangBaseVisitor;
+import thosakwe.calclang.CalcLangResolver;
+import thosakwe.calclang.CalcLangTarget;
 import thosakwe.calclang.antlr.CalcLangLexer;
 import thosakwe.calclang.antlr.CalcLangParser;
-import thosakwe.calclang.stdlib.CalcLangStdLib;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.*;
-import java.util.function.Function;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static java.lang.System.out;
+public class CalcLangInterpreter extends CalcLangTarget<Double> {
 
-class CalcLangInterpreter extends CalcLangBaseVisitor<Double> {
-    private PrintStream output;
-    private CommandLine options;
-    private CalcLangParser.CompilationUnitContext currentScript;
-    private CalcLangParser.BlockContext currentBlock;
-    private Map<String, Function<Double[], Double>> stdlib = CalcLangStdLib.get();
-    private Map<String, Double> constants = CalcLangStdLib.constants();
-
-    CalcLangInterpreter(PrintStream output, CommandLine options) {
-        this.output = output;
-        this.options = options;
-    }
-
-    private void debug(Object x) {
-        if (weAreDebugging()) output.println(x);
+    public CalcLangInterpreter(PrintStream output, CommandLine options) {
+        super(output, options);
     }
 
     /**
@@ -57,7 +44,8 @@ class CalcLangInterpreter extends CalcLangBaseVisitor<Double> {
         } else if (currentScript.functions.containsKey(name)) {
             return invokeFunction(currentScript.functions.get(name), args);
         } else {
-            output.println("Function " + name + " does not exist.");
+            if (!silent)
+                output.println("Function " + name + " does not exist.");
             return 0.0;
         }
     }
@@ -81,36 +69,24 @@ class CalcLangInterpreter extends CalcLangBaseVisitor<Double> {
         }
 
         // Fuck it, might as well copy all symbols into it too
-        oldBlock.symbols.forEach((k, v) -> {
-            debug("Injecting " + k + "=" + v.getText() + " into new scope");
-            blockContext.symbols.put(k, v);
-        });
+        if (oldBlock != null)
+            oldBlock.symbols.forEach((k, v) -> {
+                debug("Injecting " + k + "=" + v.getText() + " into new scope");
+                blockContext.symbols.put(k, v);
+            });
 
         blockContext.execute = true;
         visitFnblock(ctx);
         result = visitExpr(currentBlock.returnValue);
         currentBlock = oldBlock;
         blockContext.execute = false;
-        if (weAreDebugging()) {
+        if (weAreDebugging() && !silent) {
             output.printf("Result of %s: %f\n", name, result);
         }
         return result;
     }
 
-    /**
-     * Are we debugging?
-     *
-     * @return true or false
-     */
-    private boolean weAreDebugging() {
-        return this.options.hasOption("debug");
-    }
-
     private Double resolveSymbol(String symbol) {
-        if (symbol.equals("undefined")) {
-            System.err.println("WTF");
-            System.err.println(currentBlock.getText());
-        }
 
         CalcLangParser.BlockContext ctx = currentBlock;
         if (weAreDebugging()) {
@@ -123,7 +99,7 @@ class CalcLangInterpreter extends CalcLangBaseVisitor<Double> {
         if (constants.containsKey(symbol)) return constants.get(symbol);
         else if (currentScript.globals.containsKey(symbol)) {
             return visitExpr(currentScript.globals.get(symbol));
-        } else if (ctx.symbols.containsKey(symbol))
+        } else if (ctx != null && ctx.symbols != null && ctx.symbols.containsKey(symbol))
             return visitExpr(ctx.symbols.get(symbol));
 
         if (weAreDebugging()) output.printf("Could not resolve symbol %s.\n", symbol);
@@ -133,7 +109,6 @@ class CalcLangInterpreter extends CalcLangBaseVisitor<Double> {
     @Override
     public Double visitBlock(CalcLangParser.BlockContext ctx) {
         // Inject some friendly constants...
-        this.currentBlock = ctx;
         if (!ctx.execute) {
             return 0.0;
         }
@@ -155,7 +130,6 @@ class CalcLangInterpreter extends CalcLangBaseVisitor<Double> {
 
     @Override
     public Double visitCompilationUnit(CalcLangParser.CompilationUnitContext ctx) {
-        currentScript = ctx;
         Double result = super.visitCompilationUnit(ctx);
         if (ctx.functions.containsKey("main")) {
             CalcLangParser.FnblockContext main = ctx.functions.get("main");
@@ -199,6 +173,10 @@ class CalcLangInterpreter extends CalcLangBaseVisitor<Double> {
         else if (ctx.TRUE() != null) return 1.0;
 
         else if (ctx.function != null) {
+            if (options.getOptionValue("target").toLowerCase().equals("c")) {
+                // C compiler will resolve the function itself
+                return null;
+            }
             return invokeFunction(
                     ctx.function.getText().trim(),
                     (CalcLangParser.ExprContext[]) ctx.expr().toArray(new CalcLangParser.ExprContext[ctx.expr().size()]));
@@ -214,10 +192,6 @@ class CalcLangInterpreter extends CalcLangBaseVisitor<Double> {
                 output.printf("Resolved: %s=%f\n", ctx.ID().getText().trim(), result);
             }
             return result;
-        }
-
-        if (weAreDebugging()) {
-            output.println("Had to return 0:visitExpr");
         }
         return 0.0;
     }
@@ -278,9 +252,13 @@ class CalcLangInterpreter extends CalcLangBaseVisitor<Double> {
 
     @Override
     public Double visitPrintstmt(CalcLangParser.PrintstmtContext ctx) {
+        if (options.getOptionValue("target").toLowerCase().equals("c")) {
+            return 0.0;
+        }
         if (ctx.STRING() == null) {
             ParseTree arg = ctx.condition() != null ? ctx.condition() : ctx.expr();
-            output.println(visit(arg));
+            if (!silent)
+                output.println(visit(arg));
             return 0.0;
         }
 
@@ -313,7 +291,8 @@ class CalcLangInterpreter extends CalcLangBaseVisitor<Double> {
             }
         } while (interpolatedGroups > 2);
 
-        output.println(text);
+        if (!silent)
+            output.println(text);
         return 0.0;
     }
 

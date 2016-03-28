@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Hello World" type="Application" factoryName="Application" folderName="VM" singleton="true">
+  <configuration default="false" name="Stoichiometry (C)" type="Application" factoryName="Application" folderName="C" singleton="true">
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
     <option name="MAIN_CLASS_NAME" value="thosakwe.calclang.Main" />
     <option name="VM_PARAMETERS" value="" />
-    <option name="PROGRAM_PARAMETERS" value="-i example/hello_world.calc" />
+    <option name="PROGRAM_PARAMETERS" value="-i example/stoichiometry.calc --target=c" />
     <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
     <option name="ALTERNATIVE_JRE_PATH" />

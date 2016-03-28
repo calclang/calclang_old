@@ -2,15 +2,15 @@ package thosakwe.calclang;
 
 import thosakwe.calclang.antlr.CalcLangParser;
 
-class CalcLangResolver {
+public class CalcLangResolver {
 
-    static Double numberFromExpr(CalcLangParser.ExprContext ctx) {
+    public static Double numberFromExpr(CalcLangParser.ExprContext ctx) {
         if (ctx.HEX() != null)
             return (double) Integer.parseInt(ctx.HEX().getText().replaceAll("0x", ""), 16);
         return Double.parseDouble(ctx.getText());
     }
 
-    static Double operateOnExpr(CalcLangParser.ExprContext ctx, CalcLangParser.OperatorContext operator, Double first, Double second) {
+    public static Double operateOnExpr(CalcLangParser.ExprContext ctx, CalcLangParser.OperatorContext operator, Double first, Double second) {
         if (operator.CARET() != null) return Math.pow(first, second);
         else if (operator.TIMES() != null) return first * second;
         else if (operator.SLASH() != null) return first / second;

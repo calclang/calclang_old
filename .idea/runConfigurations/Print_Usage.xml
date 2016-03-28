@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Print Usage" type="Application" factoryName="Application" singleton="true">
+  <configuration default="false" name="Print Usage" type="Application" factoryName="Application" folderName="VM" singleton="true">
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
     <option name="MAIN_CLASS_NAME" value="thosakwe.calclang.Main" />
     <option name="VM_PARAMETERS" value="" />
