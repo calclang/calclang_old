@@ -1,3 +1,7 @@
+# calclang
+This repo is now deprecated, in favor of the *much* faster, vastly improved
+[CalcLang2](https://github.com/calclang/calclang2).
+
 ![calclang](/screenshots/geometry_output.png?raw=true "calclang")
 
 [Examples](#example)
